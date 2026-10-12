@@ -1,6 +1,10 @@
 # Starting file for Lab 1 - Chapter 12 - book_catalog.py program
 # Include your name, date, and class in the assignment comments (replace this line)
 
+def list_Books(book_catalog):
+    for title in book_catalog.keys():
+        print(title)
+
 def show_book(book_catalog):
     title = input("Title: ")
     if title in book_catalog:
@@ -49,6 +53,7 @@ def display_menu():
     print("edit - Edit book")
     print("del -  Delete book")
     print("exit - Exit program")
+    print("list - List Books")
 
 def main():
     display_menu()
@@ -63,6 +68,7 @@ def main():
             {"author" : "Kurt Vonnegut",
              "pubyear" : "1969"}
         }
+    
     while True:
         print()
         command = input("Command: ").lower()
@@ -74,11 +80,15 @@ def main():
             add_edit_book(book_catalog, mode="edit")
         elif command == "del":
             delete_book(book_catalog)
+        elif command == "list":
+            list_Books(book_catalog)
         elif command == "exit":
             print("Bye!")
             break
         else:
             print("Unknown command. Please try again.")
+
+    
 
 if __name__ == "__main__":
     main()
