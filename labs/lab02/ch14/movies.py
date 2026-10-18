@@ -1,5 +1,9 @@
 # Starting file for Lab 2 - movies.py program
-# Be sure to include your name, class, and date in this comment header
+#Nathan D'Souza
+#10/17/2026
+#Lab Activity 2 - Dev 128
+
+from objects import Movie
 
 def list(movie_list):
     if len(movie_list) == 0:
@@ -7,15 +11,15 @@ def list(movie_list):
         return
     else:
         for i, row in enumerate(movie_list, start=1):
-            print(f"{i}. {row[0]} ({row[1]})")
+            print(f"{i}. {row.getStr()}")
         print()
 
 def add(movie_list):
     name = input("Name: ")
     year = input("Year: ")
-    movie = [name, year]
+    movie = Movie(name, year)
     movie_list.append(movie)
-    print(f"{movie[0]} was added.\n")   
+    print(f"{movie.name} was added.\n")
 
 def delete(movie_list):
     number = int(input("Number: "))
@@ -23,7 +27,11 @@ def delete(movie_list):
         print("Invalid movie number.\n")
     else:
         movie = movie_list.pop(number-1)
-        print(f"{movie[0]} was deleted.\n")
+        print(f"{movie.name} was deleted.\n")
+
+def createMovie():
+    myMovie = Movie("Jaws", 1975)
+    print(myMovie.getStr())
       
 def display_menu():
     print("COMMAND MENU")
@@ -31,12 +39,13 @@ def display_menu():
     print("add -  Add a movie")
     print("del -  Delete a movie")
     print("exit - Exit program")
+    print("create - Create Movie Object")
     print()    
 
 def main():
-    movie_list = [["Monty Python and the Holy Grail", 1975],
-                  ["On the Waterfront", 1954],
-                  ["Cat on a Hot Tin Roof", 1958]]
+    movie_list = [Movie("Monty Python and the Holy Grail", 1975),
+                  Movie("On the Waterfront", 1954),
+                  Movie("Cat on a Hot Tin Roof", 1958)]
 
     display_menu()
     
@@ -48,6 +57,8 @@ def main():
             add(movie_list)
         elif command == "del":
             delete(movie_list)
+        elif command == "create":
+            createMovie()
         elif command == "exit":
             break
         else:
