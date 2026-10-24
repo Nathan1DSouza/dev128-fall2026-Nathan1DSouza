@@ -8,6 +8,7 @@ class Product:
     name:str = ""
     price:float = 0.0
     discountPercent:int = 0
+    
 
     def getDiscountAmount(self):
         return self.price * self.discountPercent / 100
@@ -19,15 +20,26 @@ class Product:
         return self.name
 
 @dataclass
-class Book(Product):
-    author:str = ""
+class Media(Product):
+    format:str = ""
 
+@dataclass
+class Book(Media):
+    author:str = ""
+    
     def getDescription(self):
-        return f"{Product.getDescription(self)} by {self.author}"
+        return f"{Product.getDescription(self)} by {self.author} {self.format}"
 
 @dataclass        
-class Movie(Product):
+class Movie(Media):
     year:int = 0
+    
+    def getDescription(self):
+        return f"{Product.getDescription(self)} ({self.year}) {self.format}"
+
+@dataclass
+class Album(Media):
+    artist:str = ""
 
     def getDescription(self):
-        return f"{Product.getDescription(self)} ({self.year})"
+        return f"{Product.getDescription(self)} ({self.artist}) {self.format}"
